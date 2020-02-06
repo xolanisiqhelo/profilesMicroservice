@@ -21,10 +21,14 @@ import com.profiles.model.JwtResponse;
 import com.profiles.model.UserDTO;
 import com.profiles.service.ProfilesService;
 
+import io.swagger.annotations.Api;
+
 
 
 @RestController
 @CrossOrigin
+@RequestMapping("")
+@Api(value="profile", description="users profile details")
 public class ProfilesController {
 
 	
@@ -38,7 +42,7 @@ public class ProfilesController {
 	private ProfilesService profilesService;
 	private static final Logger logger =LoggerFactory.getLogger(ProfilesController.class);
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@RequestMapping(value = "/authenticate", method= RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -51,7 +55,7 @@ public class ProfilesController {
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST,produces = "application/json")
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
 		logger.info("register informatiion----->", user);
 		return ResponseEntity.ok(profilesService.save(user));

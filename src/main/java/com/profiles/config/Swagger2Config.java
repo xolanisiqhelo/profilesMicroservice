@@ -20,7 +20,7 @@ public class Swagger2Config {
     public Docket UserApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("profiles"))
+                .apis(RequestHandlerSelectors.basePackage("com.profiles"))
                 .paths(PathSelectors.regex("/.*"))
                 .build()
                 .apiInfo(metaData());
